@@ -1,0 +1,85 @@
+Memoria del Proyecto: Predicción del Precio de Propiedades
+1. Introducción
+Este proyecto se centra en el desarrollo de un modelo de machine learning para predecir el precio de propiedades basado en sus características. A partir de datos de propiedades, se desarrolló una aplicación web interactiva con Streamlit para que los usuarios puedan ingresar las características de una propiedad y recibir una estimación del precio.
+
+2. Objetivos
+Desarrollar un modelo de predicción de precios de propiedades utilizando algoritmos de machine learning.
+Implementar un pipeline de procesamiento de datos para limpiar y transformar las variables del dataset.
+Crear una aplicación web sencilla e interactiva que permita a los usuarios estimar el precio de una propiedad ingresando sus características.
+3. Dataset
+El dataset utilizado contiene variables descriptivas de propiedades, incluyendo información sobre su tamaño, ubicación, año de construcción, vistas, condiciones y otras características relevantes.
+
+Variables en el Dataset
+bedrooms: Número de habitaciones.
+bathrooms: Número de baños.
+sqft_living: Área habitable en pies cuadrados.
+sqft_lot: Tamaño total del lote en pies cuadrados.
+floors: Número de pisos.
+waterfront: Indicador de vista al agua (0 = No, 1 = Sí).
+view: Calidad de la vista (0 a 4).
+condition: Estado general de la propiedad (1 a 5).
+grade: Clasificación de la calidad de construcción (1 a 13).
+sqft_above: Área sobre el nivel del suelo en pies cuadrados.
+sqft_basement: Área del sótano en pies cuadrados.
+yr_built: Año de construcción.
+yr_renovated: Año de última renovación.
+zipcode: Código postal de la ubicación de la propiedad.
+lat y long: Coordenadas geográficas.
+sqft_living15 y sqft_lot15: Promedio del área habitable y tamaño del lote de las 15 propiedades más cercanas.
+Fuente y Preparación de los Datos
+Los datos fueron almacenados en la carpeta data/raw, y se realizó una limpieza y transformación de las variables para ajustar las escalas y reducir asimetrías en la distribución. Entre las transformaciones aplicadas se incluyen:
+
+Transformación logarítmica para reducir asimetrías en price y sqft_living.
+Eliminación de valores atípicos en sqft_lot basado en el percentil 99.
+4. Metodología
+Procesamiento de Datos
+Transformación logarítmica: Variables como price y sqft_living fueron transformadas logarítmicamente para mejorar la simetría en sus distribuciones.
+Eliminación de valores atípicos: Se eliminaron valores atípicos en sqft_lot para reducir el impacto de propiedades inusualmente grandes.
+Estandarización y escalado: Los datos se estandarizaron para que las variables tengan una media de 0 y desviación estándar de 1, mejorando la eficacia del modelo.
+Selección del Modelo
+Varios modelos supervisados fueron considerados:
+
+Regresión Lineal
+Random Forest
+Gradient Boosting
+Voting Regressor
+El Random Forest mostró ser el modelo más efectivo después de la optimización de hiperparámetros.
+
+Entrenamiento y Evaluación del Modelo
+El dataset se dividió en un 80% para entrenamiento y un 20% para prueba. Se evaluaron varias métricas de error, como el Mean Squared Error (MSE), Mean Absolute Error (MAE), y R² para identificar el rendimiento del modelo.
+
+Se utilizaron técnicas de búsqueda de hiperparámetros (GridSearchCV) para optimizar parámetros clave como el número de árboles y la profundidad máxima.
+
+Implementación de la Aplicación Web
+La aplicación se desarrolló utilizando Streamlit, permitiendo al usuario ingresar las características de una propiedad para recibir una predicción del precio. Los valores ingresados son transformados internamente cuando es necesario, como en el caso de sqft_living, que es convertido a logaritmo antes de ser introducido al modelo.
+
+La estructura de archivos incluye:
+
+app.py: Archivo principal de la aplicación Streamlit.
+final_model.pkl: Modelo entrenado en formato pickle.
+requirements.txt: Dependencias para ejecutar la aplicación Streamlit.
+5. Resultados
+La evaluación del modelo muestra un rendimiento prometedor, con una alta precisión en la predicción de precios en propiedades de características similares a las incluidas en el dataset. La aplicación facilita a los usuarios una herramienta de consulta rápida y precisa para estimar el valor de propiedades con base en características concretas.
+
+Métricas de Rendimiento
+Métrica	Resultado
+MSE	XX.XX
+MAE	XX.XX
+R²	XX.XX
+Ejemplo de Predicción
+Entrada: Una casa de 3 habitaciones, 2 baños, 2000 sqft de área habitable, etc.
+Salida: Predicción del precio aproximado en USD, ajustado en base al modelo.
+6. Conclusiones y Trabajo Futuro
+El modelo entrenado demuestra una buena capacidad para predecir el precio de propiedades basándose en sus características. Sin embargo, algunos aspectos podrían mejorar en futuras iteraciones:
+
+Ajuste de Hiperparámetros Avanzado: Usar técnicas más avanzadas como RandomizedSearchCV para mejorar el rendimiento.
+Incorporación de Nuevas Variables: Agregar variables adicionales que puedan influir en el precio, como distancia a servicios o índice de criminalidad.
+Despliegue en la Web: Integrar la aplicación en un servidor en la nube para facilitar el acceso.
+7. Anexos
+Código Fuente
+app.py: Contiene el código para la aplicación de Streamlit.
+data_processing.py: Script para preprocesar los datos.
+training.py: Script para entrenar el modelo.
+Requisitos de Software
+Python 3.7+
+Bibliotecas: streamlit, pandas, numpy, scikit-learn, joblib, pyyaml
