@@ -95,8 +95,9 @@ Para evaluar el modelo:
 
 ```bash
 python src/evaluation.py
-El script evalúa el modelo utilizando el conjunto de prueba y muestra métricas de rendimiento como el Mean Squared Error (MSE) y R-squared (R²).
 ```
+El script evalúa el modelo utilizando el conjunto de prueba y muestra métricas de rendimiento como el Mean Squared Error (MSE) y R-squared (R²).
+
 ## Aplicación Web
 La aplicación en Streamlit permite al usuario ingresar las características de una propiedad y obtener una predicción del precio.
 
